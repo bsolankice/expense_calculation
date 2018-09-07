@@ -8,12 +8,15 @@
 $calc = new ExpenseCalculation();
 $calc->calculateExpense();
 
+/**
+ * This class include all the required function related
+ * to expense calculation.
+ */
 class ExpenseCalculation{
 
-    public $persons = ['A' , 'B' ,'C','D'];
-    public $owes = [];
-
-    public $expenses = [
+    protected $persons = ['A' , 'B' ,'C','D'];
+    protected $owes = [];
+    protected $expenses = [
             1 => [
                 'payer' => 'A',
                 'amount' => '40000',
@@ -65,7 +68,7 @@ class ExpenseCalculation{
     /**
      * Calculate Total amount
      */    
-    function totalAmount(){
+    protected function totalAmount(){
                
         $totalAmount = array_sum(
             array_map(function($expenses) { 
@@ -77,16 +80,16 @@ class ExpenseCalculation{
         echo "\n\tTotal Amount is \t\t$totalAmount";
         echo $this->seprator();
 
-    }    
+    }       
 
-    function seprator(){
+    protected function seprator(){
         return "\n\t------------------------------------------";
     }
 
     /**
      * Calculate Total Amount paid by per person
      */
-    function individualTotalPaidAmount(){
+    protected function individualTotalPaidAmount(){
 
         foreach ($this->persons as $person) {
            
@@ -108,7 +111,7 @@ class ExpenseCalculation{
     /**
      * Find per person amount from perticular expense amount
      */
-    function findPerPersonAmount($expense){
+    protected function findPerPersonAmount($expense){
         return number_format(
                 (float)$expense['amount'] / count ($expense['peoples']), 2, '.', ''
             );
@@ -117,7 +120,7 @@ class ExpenseCalculation{
     /**
      * Function to calculate expense
      */
-    function calculateExpense(){
+    public function calculateExpense(){
         
         foreach ($this->expenses as $expense) {
 
@@ -168,7 +171,7 @@ class ExpenseCalculation{
     /**
      * Display Owes Amount
      */
-    function displayOwesAmount(){
+    protected function displayOwesAmount(){
 
         echo "\n\n";
         foreach ($this->owes as $owePerson => $persons) {
